@@ -5,7 +5,6 @@ import com.dionysun.forum.common.Constant;
 import com.dionysun.forum.common.Result;
 import com.dionysun.forum.entity.User;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,6 @@ public class HomeController {
     }
 
     @ApiOperation(value = "获取user", notes = "根据id获取user对象")
-    @ApiImplicitParam(name = "userid",value = "id", required = true)
     @GetMapping(value = "/get/{userid}")
     public Result<User> getUser(@PathVariable Integer userid){
         User u = new User();
@@ -32,6 +30,6 @@ public class HomeController {
         u.setName("test");
         u.setGender("嬲");
         u.setPassword("1234");
-        return new Result<User>(Constant.OK, "获取成功", u);
+        return new Result<>(Constant.OK, "获取成功", u);
     }
 }
