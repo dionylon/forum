@@ -7,6 +7,7 @@ import com.dionysun.forum.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,4 +33,7 @@ public class HomeController {
         u.setPassword("1234");
         return new Result<>(Constant.OK, "获取成功", u);
     }
+
+
+
 }

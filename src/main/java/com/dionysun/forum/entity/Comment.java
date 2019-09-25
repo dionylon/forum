@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -12,6 +13,8 @@ import java.util.Date;
 @Entity
 @Table(name = "comment")
 public class Comment extends AbstractEntity {
+    @Id
+    private Integer id;
     private Integer articleId;
     private Integer authorId;
     private String content;
