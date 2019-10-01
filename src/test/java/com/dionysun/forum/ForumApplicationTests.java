@@ -1,6 +1,8 @@
 package com.dionysun.forum;
 
+import com.dionysun.forum.dao.ArticleDao;
 import com.dionysun.forum.dao.UserDao;
+import com.dionysun.forum.entity.Article;
 import com.dionysun.forum.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,5 +35,31 @@ public class ForumApplicationTests {
         user.setGmtCreate(new Date());
         user.setGmtModified(new Date());
         userDao.save(user);
+    }
+    @Autowired
+    private ArticleDao articleDao;
+    @Test
+    public void findTest(){
+        for(int i = 0; i < 20; ++i){
+            Article article = new Article();
+            article.setAuthorId(10001);
+            article.setContent("test");
+            article.setId(1000 + i);
+            article.setVisible(1);
+            article.setThumbUp(i*11);
+            article.setGmtCreate(new Date());
+            article.setGmtModified(new Date());
+            articleDao.save(article);
+        }
+    }
+
+    @Test
+    public void listTest(){
+        List<Article> articles = articleDao.findArticleByAuthorId(10001);
+        if(articles != null){
+            for(int i = 0; i < articles.size(); ++i){
+                System.out.println(articles.get(i));
+            }
+        }
     }
 }
