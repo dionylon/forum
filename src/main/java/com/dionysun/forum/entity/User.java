@@ -3,32 +3,19 @@ package com.dionysun.forum.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "user")
-@EqualsAndHashCode(callSuper = true)
-public class User extends AbstractEntity {
+public class User {
     @Id
-    private Integer id;
-    @Column(length = 10)
-    private String gender;
-    @Column(length = 100)
-    private String phone;
-    @Column
-    private Date birthday;
-    @Column(length = 30)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
-    @Column(length = 30)
+    private String gender;
+    private String phone;
+    private Date birthday;
     private String password;
-    @Column
-    private Date gmtCreate;
-    @Column
-    private Date gmtModified;
-
 }

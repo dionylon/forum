@@ -26,11 +26,11 @@ public class ApiTestController {
     @GetMapping(value = "/get/{userid}")
     public Result<User> getUser(@PathVariable Integer userid){
         User u = new User();
-        u.setId(-100);
+        u.setId(10L);
         u.setName("test");
         u.setGender("嬲");
         u.setPassword("1234");
-        return new Result<>(Constant.OK, "获取成功", u);
+        return new Result<User>(Constant.OK, u);
     }
 
 
