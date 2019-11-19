@@ -1,7 +1,7 @@
 package com.dionysun.forum.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dionysun.forum.common.Constant;
+import com.dionysun.forum.common.StatusCode;
 import com.dionysun.forum.common.Result;
 import com.dionysun.forum.entity.User;
 import io.swagger.annotations.Api;
@@ -18,7 +18,7 @@ public class ApiTestController {
     public ResponseEntity<JSONObject> hello(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("msg","hello");
-        jsonObject.put("status", Constant.OK);
+        jsonObject.put("status", StatusCode.OK);
         return ResponseEntity.ok(jsonObject);
     }
 
@@ -30,9 +30,7 @@ public class ApiTestController {
         u.setName("test");
         u.setGender("嬲");
         u.setPassword("1234");
-        return new Result<User>(Constant.OK, u);
+        return new Result<User>(StatusCode.OK, u);
     }
-
-
 
 }

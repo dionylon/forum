@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FollowDao extends JpaRepository<Follow, Long> {
-    List<Long> findAllByUserId(Long userId);
-    List<Long> findAllByFollowerId(Long followerId);
+    List<Follow> findAllByUserId(Long userId);
 }

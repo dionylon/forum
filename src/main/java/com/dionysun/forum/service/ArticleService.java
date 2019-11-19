@@ -10,15 +10,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ArticleService {
 
     @Autowired
     private ArticleDao articleDao;
+
 
     public Page<Article> getArticles(int page, int size){
         Pageable pageable = PageRequest.of(page,size, Sort.Direction.DESC,"createTime");
@@ -30,7 +29,7 @@ public class ArticleService {
     }
 
     public List<Article> getLatestArticles(){
-        return getLatestArticles(1);
+        return getLatestArticles(3);
     }
     public List<Article> getLatestArticles(int days){
         return articleDao.findArticlesByCreateTimeAfter(DateUtil.daysBefore(days));

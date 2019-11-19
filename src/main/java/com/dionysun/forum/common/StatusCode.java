@@ -1,7 +1,7 @@
 package com.dionysun.forum.common;
 
-public final class Constant {
-    private Constant() {
+public final class StatusCode {
+    private StatusCode() {
     }
 
     public static Integer OK = 100001;

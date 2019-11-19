@@ -13,9 +13,9 @@ public class Result<T> extends JSONObject{
     private Integer statusCode;
     private T object;
 
-    public Result(Integer statusCode, T object) {
+    public Result(Integer statusCode, T data) {
         this.statusCode = statusCode;
-        this.object = object;
+        this.object = data;
         put("status",statusCode);
         put("data",object);
     }
