@@ -18,7 +18,6 @@ public class ArticleService {
     @Autowired
     private ArticleDao articleDao;
 
-
     public Page<Article> getArticles(int page, int size){
         Pageable pageable = PageRequest.of(page,size, Sort.Direction.DESC,"createTime");
         return articleDao.findAll(pageable);
