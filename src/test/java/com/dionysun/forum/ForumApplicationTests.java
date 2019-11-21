@@ -7,10 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import sun.rmi.runtime.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -25,7 +22,7 @@ public class ForumApplicationTests {
     private ArticleDao articleDao;
     @Autowired
     private CommentDao commentDao;
-    @Test
+
     public void followTest(){
         for(long i = 2;i < 10;++i){
             User user = null;
@@ -39,7 +36,6 @@ public class ForumApplicationTests {
         }
     }
 
-    @Test
     public void articleTest(){
         for(int i = 2;i < 10;++i){
             Article article = new Article();
@@ -53,7 +49,6 @@ public class ForumApplicationTests {
         }
     }
 
-    @Test
     public void  commentTest(){
         for(int i = 1; i < 9; ++i){
             Comment comment = new Comment();
@@ -66,7 +61,7 @@ public class ForumApplicationTests {
     }
     @Autowired
     private UserInfoDao userInfoDao;
-    @Test
+
     public void userInfoTest(){
         UserInfo info = userInfoDao.findUserInfoById(1L);
         System.out.println(info);
