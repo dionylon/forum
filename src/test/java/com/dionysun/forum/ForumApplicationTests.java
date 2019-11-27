@@ -22,48 +22,19 @@ public class ForumApplicationTests {
     private ArticleDao articleDao;
     @Autowired
     private CommentDao commentDao;
-
-    public void followTest(){
-        for(long i = 2;i < 10;++i){
-            User user = null;
-            Follow follow = new Follow();
-            Optional<User> o =  userDao.findById(i);
-            if(o.isPresent()){
-                follow.setUserId(1L);
-                follow.setFollowerId(i);
-                followDao.save(follow);
-            }
-        }
-    }
-
-    public void articleTest(){
-        for(int i = 2;i < 10;++i){
-            Article article = new Article();
-            article.setAuthorId((long) i);
-            article.setThumbUp(i*i);
-            article.setTitle(UUID.randomUUID().toString());
-            article.setContent("test");
-            article.setCreateTime(new Date());
-            article.setLastModified(article.getCreateTime());
-            articleDao.save(article);
-        }
-    }
-
-    public void  commentTest(){
-        for(int i = 1; i < 9; ++i){
-            Comment comment = new Comment();
-            comment.setArticleId((long) i);
-            comment.setAuthorId(1L);
-            comment.setContent(i % 2 == 0 ? "666" : "我觉得不行");
-            comment.setCreateTime(new Date());
-            commentDao.save(comment);
-        }
-    }
     @Autowired
-    private UserInfoDao userInfoDao;
+    private ThumbUpDao likeDao;
 
-    public void userInfoTest(){
-        UserInfo info = userInfoDao.findUserInfoById(1L);
-        System.out.println(info);
+    @Test
+    public void likeTest(){
+        for(int i = 1; i <= 10; ++i) {
+            ThumbUp thumbUp = new ThumbUp();
+            thumbUp.setUserId((long) i);
+            thumbUp.setType(1);
+            thumbUp.setLikeTime(new Date());
+            thumbUp.setThumbId((long) i);
+            likeDao.save(thumbUp);
+        }
     }
+
 }

@@ -13,7 +13,4 @@ import java.util.List;
 @Transactional
 public interface CommentDao extends JpaRepository<Comment, Long> {
     List<Comment> findCommentsByArticleId(Long id);
-    @Procedure(name = "addComments")
-    void addComments(@Param("articleId")long articleId, @Param("authorId")long authorId,
-                     @Param("template")String str, @Param("total")int total);
 }

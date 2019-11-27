@@ -15,7 +15,7 @@ public class Article {
     private Long authorId;
     private String title;
     private String content;
-    private Integer thumbUp;
     private Date createTime;
     private Date lastModified;
+    private Integer thumbUp;
 }
