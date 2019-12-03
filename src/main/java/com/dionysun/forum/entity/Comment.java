@@ -17,4 +17,6 @@ public class Comment {
     private Long authorId;
     private String content;
     private Date createTime;
+    @Transient
+    private Integer thumbUp;
 }

@@ -1,5 +1,6 @@
 package com.dionysun.forum.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dionysun.forum.dao.ArticleDao;
 import com.dionysun.forum.dao.CollectDao;
 import com.dionysun.forum.dao.ThumbUpDao;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.*;
 
@@ -30,6 +32,18 @@ public class ArticleService {
 
     public int countThumbUp(long articleId){
         return thumbUpDao.countThumbUpsByThumbIdAndType(articleId, ThumbUpType.ARTICLE);
+    }
+
+    public void uploadArticle(JSONObject body){
+        System.out.println(body);
+        Article article = new Article();
+        article.setAuthorId(body.getLong("authorId"));
+        article.setTitle(body.getString("title"));
+        article.setContent(body.getString("content"));
+        Date now = new Date();
+        article.setLastModified(now);
+        article.setCreateTime(now);
+        articleDao.save(article);
     }
 
     /**
