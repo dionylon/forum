@@ -10,6 +10,4 @@ import java.util.List;
 
 @Repository
 public interface ArticleDao extends JpaRepository<Article, Long> {
-    List<Article> findArticleByAuthorId(Long authorId);
-    List<Article> findArticlesByCreateTimeAfter(Date date);
 }

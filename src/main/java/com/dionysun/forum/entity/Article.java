@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@Table(name = "article_info")
+@Table(name = "article")
 @Entity
 public class Article {
     @Id
@@ -17,5 +17,4 @@ public class Article {
     private String content;
     private Date createTime;
     private Date lastModified;
-    private Integer thumbUp;
 }

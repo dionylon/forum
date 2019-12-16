@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dionysun.forum.common.Result;
 import com.dionysun.forum.common.StatusCode;
 import com.dionysun.forum.entity.Article;
+import com.dionysun.forum.entity.ArticleInfo;
 import com.dionysun.forum.entity.ThumbUpType;
 import com.dionysun.forum.service.ArticleService;
 import com.dionysun.forum.service.CommentService;
@@ -62,11 +63,11 @@ public class ArticleController {
     }
     @GetMapping("/{articleId}")
     public ResponseEntity getArticleById(@PathVariable(value = "articleId")long articleId){
-        Article article = articleService.getArticleById(articleId);
+        ArticleInfo article = articleService.getArticleInfoById(articleId);
         if(article == null){
             return ResponseEntity.badRequest().build();
         }
-        article.setThumbUp(articleService.countThumbUp(articleId));
+
         return ResponseEntity.ok().body(JSONObject.toJSON(article));
     }
 

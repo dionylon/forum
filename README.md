@@ -1,5 +1,6 @@
 # forum
 
-spring boot project
+简单的论坛项目
 
-with spring data jpa
+使用MySQL数据库
+建表语句见 init.sql

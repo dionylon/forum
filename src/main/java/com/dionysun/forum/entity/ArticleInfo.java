@@ -6,18 +6,16 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
+@Table(name = "article_info")
 @Entity
-@Table(name = "comment")
-public class Comment {
+public class ArticleInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long articleId;
     private Long authorId;
+    private String title;
     private String content;
     private Date createTime;
-    @Transient
+    private Date lastModified;
+
     private Integer thumbUp;
-    @Transient
-    private UserInfo authorInfo;
 }

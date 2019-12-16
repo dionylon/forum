@@ -2,12 +2,12 @@ package com.dionysun.forum.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dionysun.forum.dao.ArticleDao;
-import com.dionysun.forum.dao.CollectDao;
+import com.dionysun.forum.dao.ArticleInfoDao;
 import com.dionysun.forum.dao.ThumbUpDao;
 import com.dionysun.forum.entity.Article;
+import com.dionysun.forum.entity.ArticleInfo;
 import com.dionysun.forum.entity.ThumbUp;
 import com.dionysun.forum.entity.ThumbUpType;
-import com.dionysun.forum.entity.User;
 import com.dionysun.forum.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,9 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ArticleService {
@@ -26,9 +26,9 @@ public class ArticleService {
     @Autowired
     private ArticleDao articleDao;
     @Autowired
-    private ThumbUpDao thumbUpDao;
+    private ArticleInfoDao articleInfoDao;
     @Autowired
-    private CollectDao collectDao;
+    private ThumbUpDao thumbUpDao;
 
     public int countThumbUp(long articleId){
         return thumbUpDao.countThumbUpsByThumbIdAndType(articleId, ThumbUpType.ARTICLE);
@@ -101,14 +101,14 @@ public class ArticleService {
      * @param id 作者id
      * @return 文章List
      */
-    public List<Article> getArticlesByAuthorId(long id){
-        return articleDao.findArticleByAuthorId(id);
+    public List<ArticleInfo> getArticlesByAuthorId(long id){
+        return articleInfoDao.findArticleInfoByAuthorId(id);
     }
 
     /**
      * 获取最近3天的文章
      */
-    public List<Article> getLatestArticles(){
+    public List<ArticleInfo> getLatestArticles(){
         return getLatestArticles(3);
     }
 
@@ -116,8 +116,8 @@ public class ArticleService {
      * @param days 最近days天
      * @return 文章list
      */
-    public List<Article> getLatestArticles(int days){
-        return articleDao.findArticlesByCreateTimeAfter(DateUtil.daysBefore(days));
+    public List<ArticleInfo> getLatestArticles(int days){
+        return articleInfoDao.findArticleInfosByCreateTimeAfter(DateUtil.daysBefore(days));
     }
 
     /**
@@ -125,8 +125,8 @@ public class ArticleService {
      * @param articleId id
      * @return 文章对象
      */
-    public Article getArticleById(long articleId){
-        return articleDao.getOne(articleId);
+    public ArticleInfo getArticleInfoById(long articleId){
+        return articleInfoDao.getOne(articleId);
     }
 
 
