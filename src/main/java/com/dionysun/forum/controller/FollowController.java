@@ -2,6 +2,8 @@ package com.dionysun.forum.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.dionysun.forum.annotation.Auth;
+import com.dionysun.forum.entity.User;
 import com.dionysun.forum.entity.UserInfo;
 import com.dionysun.forum.service.FollowService;
 import com.dionysun.forum.service.UserInfoService;
@@ -39,4 +41,20 @@ public class FollowController {
         return ResponseEntity.ok(JSONObject.toJSON(followerList));
     }
 
+    @Auth
+    @PostMapping("/follow")
+    public ResponseEntity follow(@RequestBody JSONObject body){
+        long userId = 0;
+        long fansId = 0;
+        try {
+            userId = body.getLong("userId");
+            fansId = body.getLong("fansId");
+        } catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+        if(!userInfoService.existsById(userId) || !userInfoService.existsById(fansId)){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
+    }
 }

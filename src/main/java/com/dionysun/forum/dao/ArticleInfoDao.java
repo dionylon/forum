@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface ArticleInfoDao extends JpaRepository<ArticleInfo, Long> {
     List<ArticleInfo> findArticleInfoByAuthorId(Long authorId);
+    List<ArticleInfo> findArticleInfosByAuthorIdOrderByCreateTimeDesc(long authorId);
     List<ArticleInfo> findArticleInfosByCreateTimeAfter(Date date);
 }

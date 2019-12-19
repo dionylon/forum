@@ -6,6 +6,7 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Data
 @ToString
@@ -18,4 +19,5 @@ public class UserInfo {
     private Integer following;
     private String name;
     private Integer gender;
+    private Date birthday;
 }

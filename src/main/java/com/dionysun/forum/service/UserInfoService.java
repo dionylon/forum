@@ -25,6 +25,9 @@ public class UserInfoService {
         }
         return userInfoDao.findAllById(followIdList);
     }
+    public boolean existsById(long userId){
+        return userInfoDao.existsById(userId);
+    }
     public boolean exists(String username){
         return userInfoDao.existsByName(username);
     }

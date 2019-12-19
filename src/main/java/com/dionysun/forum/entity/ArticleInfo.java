@@ -16,6 +16,6 @@ public class ArticleInfo {
     private String content;
     private Date createTime;
     private Date lastModified;
-
+    private String authorName;
     private Integer thumbUp;
 }

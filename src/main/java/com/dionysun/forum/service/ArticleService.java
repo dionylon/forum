@@ -106,6 +106,15 @@ public class ArticleService {
     }
 
     /**
+     * 时间降序
+     * @param id
+     * @return
+     */
+    public List<ArticleInfo> getArticlesByAuthorIdDesc(long id){
+        return articleInfoDao.findArticleInfosByAuthorIdOrderByCreateTimeDesc(id);
+    }
+
+    /**
      * 获取最近3天的文章
      */
     public List<ArticleInfo> getLatestArticles(){

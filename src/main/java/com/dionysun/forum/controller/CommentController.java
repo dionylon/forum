@@ -2,6 +2,7 @@ package com.dionysun.forum.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.dionysun.forum.annotation.Auth;
 import com.dionysun.forum.common.Result;
 import com.dionysun.forum.common.StatusCode;
 import com.dionysun.forum.entity.Comment;
@@ -24,6 +25,7 @@ public class CommentController {
     public ResponseEntity<List<Comment>> getComments(@PathVariable(name = "articleId") long articleId){
         return ResponseEntity.ok().body(commentService.getCommentsByArticleId(articleId));
     }
+    @Auth
     @PostMapping("/article/{articleId}/comment")
     public Result addComment(@PathVariable(name = "articleId")long articleId,
                              @RequestBody JSONObject body){

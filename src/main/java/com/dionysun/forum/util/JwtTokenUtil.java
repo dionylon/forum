@@ -2,6 +2,7 @@ package com.dionysun.forum.util;
 
 
 import com.dionysun.forum.entity.User;
+import com.dionysun.forum.entity.UserInfo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,7 +22,7 @@ public class JwtTokenUtil implements Serializable {
     @Value("${jwt.secret}")
     private String secret;
     //retrieve username from jwt token
-    public String getUsernameFromToken(String token) {
+    public String getUserIdFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
     //retrieve expiration date from jwt token
@@ -44,7 +45,7 @@ public class JwtTokenUtil implements Serializable {
     //generate token for user
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, user.getName());
+        return doGenerateToken(claims, String.valueOf(user.getId()));
     }
     //while creating the token -
     //1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
@@ -58,7 +59,7 @@ public class JwtTokenUtil implements Serializable {
     }
     //validate token
     public Boolean validateToken(String token, User user) {
-        final String username = getUsernameFromToken(token);
-        return (username.equals(user.getName()) && !isTokenExpired(token));
+        final String userId = getUserIdFromToken(token);
+        return (userId.equals(String.valueOf(user.getId())) && !isTokenExpired(token));
     }
 }

@@ -1,6 +1,7 @@
 package com.dionysun.forum.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.dionysun.forum.annotation.Auth;
 import com.dionysun.forum.entity.UserInfo;
 import com.dionysun.forum.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;

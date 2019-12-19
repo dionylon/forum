@@ -1,6 +1,7 @@
 package com.dionysun.forum.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.dionysun.forum.annotation.Auth;
 import com.dionysun.forum.common.Result;
 import com.dionysun.forum.common.StatusCode;
 import com.dionysun.forum.entity.Article;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -27,6 +30,7 @@ public class ArticleController {
      * @param body 文章信息，包括用户id和文章标题、内容
      * @return 发布成功，返回消息和文章的id
      */
+    @Auth
     @PostMapping("")
     public Result uploadArticle(@RequestBody JSONObject body){
         articleService.uploadArticle(body);
@@ -40,6 +44,7 @@ public class ArticleController {
      * @param articleId id
      * @return 结果,OK说明点赞，REPEAT说明点过赞了，点踩
      */
+    @Auth
     @PostMapping("/thumbUp/{userId}/{articleId}")
     public Result thumbUpArticle(@PathVariable(value = "userId")long userId,
                           @PathVariable(value = "articleId")long articleId){
@@ -76,7 +81,10 @@ public class ArticleController {
                                                          @PathVariable(value = "size") int size){
         return ResponseEntity.ok().body(articleService.getArticles(page - 1 , size));
     }
-
+    @GetMapping("/author/{authorId}")
+    public ResponseEntity getArticlesByAuthorId(@PathVariable("authorId") long authorId){
+        return ResponseEntity.ok().body(articleService.getArticlesByAuthorIdDesc(authorId));
+    }
     @GetMapping("/latest")
     public ResponseEntity latestArticles(){
         return ResponseEntity.ok().body(articleService.getLatestArticles());
@@ -86,5 +94,4 @@ public class ArticleController {
     public ResponseEntity latestArticles(@PathVariable Integer days){
         return ResponseEntity.ok().body(articleService.getLatestArticles(days));
     }
-
 }

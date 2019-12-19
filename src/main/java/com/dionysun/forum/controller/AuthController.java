@@ -45,6 +45,7 @@ public class AuthController {
             return new Result(ERROR, "错误的用户名/密码");
         }
         result.put("userId",user.getId());
+        result.put("username",user.getName());
         result.put("token",jwtTokenUtil.generateToken(user));
         return result;
     }
