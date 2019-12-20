@@ -40,6 +40,7 @@ public class ArticleService {
         article.setAuthorId(body.getLong("authorId"));
         article.setTitle(body.getString("title"));
         article.setContent(body.getString("content"));
+        article.setDeleted((byte)0);
         Date now = new Date();
         article.setLastModified(now);
         article.setCreateTime(now);
@@ -91,9 +92,15 @@ public class ArticleService {
      * @param size 每页文章数
      * @return Page对象
      */
-    public Page<Article> getArticles(int page, int size){
+    public Page<ArticleInfo> getArticles(int page, int size){
         Pageable pageable = PageRequest.of(page,size, Sort.Direction.DESC,"createTime");
-        return articleDao.findAll(pageable);
+        return articleInfoDao.findAll(pageable);
+    }
+    public boolean existsById(long articleId){
+        return articleDao.existsById(articleId);
+    }
+    public Article getArticleById(long articleId){
+        return articleDao.findArticleById(articleId);
     }
 
     /**
@@ -138,5 +145,17 @@ public class ArticleService {
         return articleInfoDao.getOne(articleId);
     }
 
-
+    /**
+     * 并不直接删除，而是设置deleted为1，这样在视图中就不会出现
+     * @param articleId id
+     */
+    public void deleteById(long articleId){
+        Article article = articleDao.findArticleById(articleId);
+        article.setDeleted((byte) 1);
+        articleDao.save(article);
+    }
+    public void updateArticle(Article article){
+        article.setLastModified(new Date());
+        articleDao.save(article);
+    }
 }

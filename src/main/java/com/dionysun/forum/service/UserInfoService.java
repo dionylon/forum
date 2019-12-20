@@ -34,4 +34,7 @@ public class UserInfoService {
     public UserInfo getUserInfoById(long id){
         return userInfoDao.getOne(id);
     }
+    public UserInfo getUserInfoByName(String name){
+        return userInfoDao.findUserInfoByName(name);
+    }
 }

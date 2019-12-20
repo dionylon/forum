@@ -17,4 +17,5 @@ public class Article {
     private String content;
     private Date createTime;
     private Date lastModified;
+    private Byte deleted;
 }

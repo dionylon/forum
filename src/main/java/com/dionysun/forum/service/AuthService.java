@@ -2,6 +2,7 @@ package com.dionysun.forum.service;
 
 import com.dionysun.forum.dao.UserDao;
 import com.dionysun.forum.entity.User;
+import com.dionysun.forum.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public class AuthService {
     private UserDao userDao;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
 
     public User login(String username, String password){
         User user = userDao.findUserByName(username);
@@ -38,5 +41,22 @@ public class AuthService {
      */
     private boolean isValidPassword(String rawPassword, String encodePassword) {
         return passwordEncoder.matches(rawPassword, encodePassword);
+    }
+
+    /**
+     * 检验token中的id与目标id是否一致
+     * @param token jwt token，payload为userId
+     * @param userId 目标id
+     * @return ==
+     */
+    public boolean checkTokenId(String token, long userId){
+        Long tokenId = null;
+        try {
+            tokenId = Long.parseLong(jwtTokenUtil.getUserIdFromToken(token));
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            return false;
+        }
+        return Objects.equals(tokenId, userId);
     }
 }

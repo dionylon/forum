@@ -10,4 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ArticleDao extends JpaRepository<Article, Long> {
+    Article findArticleById(long id);
 }
